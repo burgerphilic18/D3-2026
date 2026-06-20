@@ -3,7 +3,7 @@ import path from "path";
 import Image from "next/image";
 import Link from "next/link";
 import BitButton from "@/components/ui/8bit-button";
-import { SpiralGallery } from "./spiral-gallery";
+import { ResponsiveGallery } from "./responsive-gallery";
 import type { Product } from "@/lib/products";
 import { ArrowLeft } from "lucide-react";
 
@@ -46,7 +46,7 @@ export default function GalleryPage() {
       <div className="absolute top-6 right-6 z-20">
         <BitButton
           asChild
-          className="font-[family-name:var(--font-steve)] text-sm tracking-widest px-5 py-1"
+         className="font-[family-name:var(--font-steve)] text-xs sm:text-sm tracking-widest px-3 sm:px-5 py-1"
         >
           <Link href="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
@@ -55,7 +55,7 @@ export default function GalleryPage() {
         </BitButton>
       </div>
 
-      <SpiralGallery products={products} />
+     <ResponsiveGallery products={products} />
     </main>
   );
 }
