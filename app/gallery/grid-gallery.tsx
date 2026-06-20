@@ -16,13 +16,14 @@ export function GridGallery({
             key={product.id}
             className="relative overflow-hidden rounded-xl border border-white/10"
           >
-            <Image
-              src={product.image}
-              alt={product.title}
-              width={500}
-              height={300}
-              className="w-full h-auto object-cover"
-            />
+           <Image
+  src={product.image}
+  alt={product.title}
+  width={500}
+  height={300}
+  sizes="50vw"
+  className="w-full aspect-video object-cover"
+/>
           </div>
         ))}
       </div>

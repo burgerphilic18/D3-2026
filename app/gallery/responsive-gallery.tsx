@@ -11,21 +11,21 @@ export function ResponsiveGallery({
   products: Product[];
 }) {
   const [isMobile, setIsMobile] = useState(false);
+useEffect(() => {
+  const mediaQuery = window.matchMedia("(max-width: 767px)");
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  setIsMobile(mediaQuery.matches);
 
-    checkMobile();
+  const handleMediaChange = (e: MediaQueryListEvent) => {
+    setIsMobile(e.matches);
+  };
 
-    window.addEventListener("resize", checkMobile);
+  mediaQuery.addEventListener("change", handleMediaChange);
 
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
-
+  return () => {
+    mediaQuery.removeEventListener("change", handleMediaChange);
+  };
+}, []);
   return isMobile ? (
     <GridGallery products={products} />
   ) : (
