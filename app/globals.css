@@ -52,8 +52,55 @@
   50% { transform: translateY(-8px); }
 }
 
+@keyframes laneCurrentLeft {
+  0% { transform: translateX(0); }
+  35% { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes laneNextLeft {
+  0% { transform: translateX(100%); }
+  35% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes laneCurrentRight {
+  0% { transform: translateX(0); }
+  35% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes laneNextRight {
+  0% { transform: translateX(-100%); }
+  35% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes laneScrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes laneScrollRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.lane-scroll-left {
+  animation: laneScrollLeft 48s linear infinite;
+}
+
+.lane-scroll-right {
+  animation: laneScrollRight 48s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-retro-float {
+    animation: none;
+  }
+
+  .lane-scroll-left,
+  .lane-scroll-right {
     animation: none;
   }
 }
