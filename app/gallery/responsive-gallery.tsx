@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import type { Product } from "@/lib/products";
 
@@ -18,14 +19,32 @@ export function ResponsiveGallery({
 }: {
   products: Product[];
 }) {
-  return (
-    <>
-      <div className="md:hidden">
-        <LazyGridGallery products={products} />
-      </div>
-      <div className="hidden md:block">
-        <LazySpiralGallery products={products} />
-      </div>
-    </>
+  const [isMobile, setIsMobile] = useState<boolean | null>(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 767px)").matches
+      : null
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaChange);
+    };
+  }, []);
+
+  if (isMobile === null) {
+    return null;
+  }
+
+  return isMobile ? (
+    <LazyGridGallery products={products} />
+  ) : (
+    <LazySpiralGallery products={products} />
   );
 }

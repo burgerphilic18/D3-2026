@@ -91,7 +91,7 @@ function ContinuousLane({
     if (!animName || animName === "none" || animDuration === 0) {
       let start: number | null = null;
       const DURATION = 48000; // match CSS 48s
-      const sign = reverse ? -1 : 1;
+      let frameId: number;
 
       const tick = (t: number) => {
         if (start === null) start = t;
@@ -104,11 +104,11 @@ function ContinuousLane({
         const value = from + (to - from) * progress;
 
         el.style.transform = `translateX(${value}%)`;
-        requestAnimationFrame(tick);
+        frameId = requestAnimationFrame(tick);
       };
 
-      const id = requestAnimationFrame(tick);
-      return () => cancelAnimationFrame(id);
+      frameId = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(frameId);
     }
     return;
   }, [reverse]);
